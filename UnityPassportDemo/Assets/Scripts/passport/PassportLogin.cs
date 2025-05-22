@@ -32,7 +32,7 @@ namespace UnityPassportDemo {
             #endif
             
             // Set the environment to SANDBOX for testing or PRODUCTION for production
-            string environment = Immutable.Passport.Model.Environment.PRODUCTION;
+            string environment = Immutable.Passport.Model.Environment.SANDBOX;
 
             if (Immutable.Passport.Passport.Instance == null) {
                 await Immutable.Passport.Passport.Init(ClientId, environment, redirectUri, logoutUri);

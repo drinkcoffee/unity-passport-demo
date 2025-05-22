@@ -20,14 +20,13 @@ namespace UnityPassportDemo {
 
     public class CheckContract : PassportFunctionCalls {
         public const string TESTNET_ADDRESS = "0xe54431e297c3126d619cde60728cfafeac78a07e";
-        public const string TESTNET_RPC_URL = "https://rpc.immutable.com/";
+        public const string TESTNET_RPC_URL = "https://rpc.testnet.immutable.com/";
 
         public const string MAINNET_RPC_URL = "https://rpc.immutable.com/";
 
         UnityImmutableCheckService service;
 
         public CheckContract(bool mainnet) : base() {
-            AuditLog.Log($"Using Mainnet configurtion = {mainnet}");
             string rpc;
             if (mainnet) {
                 rpc = MAINNET_RPC_URL;
@@ -38,6 +37,8 @@ namespace UnityPassportDemo {
                 contractAddress = TESTNET_ADDRESS;
                 rpc = TESTNET_RPC_URL;
             }
+            var network = mainnet ? "Mainnet" : "Testnet";
+            AuditLog.Log($"Configuration: Network: {network}, Contract: {contractAddress}");
 
             var web3 = new Web3(rpc);
             service = new UnityImmutableCheckService(web3, contractAddress);
@@ -46,7 +47,8 @@ namespace UnityPassportDemo {
 
 
         public async Task<uint> GetValue() {
-            BigInteger val = await service.ValueQueryAsync();
+            ValueFunction func = new ValueFunction();
+            BigInteger val = await service.ValueQueryAsync(func);
             if (val < 0 || val > uint.MaxValue) {
                 AuditLog.Log($"ERROR: Value {val} is outside uint range");
                 // Use 7 to indicate an error.

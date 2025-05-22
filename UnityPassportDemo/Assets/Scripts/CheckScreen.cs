@@ -92,14 +92,14 @@ namespace UnityPassportDemo {
                     addToStatus("Calling SetValue(17)");
                     var success = await contract.SetValue(17);
                     if (!success) {
-                        addToStatus("\n Error during SetValue(17): Transaction failed");
+                        addToStatus("Error during SetValue(17): Transaction failed");
                     }
                     else {
-                        addToStatus("\n Completed SetValue(17)");
+                        addToStatus("Completed SetValue(17)");
                     }
                 }
                 catch (Exception ex) {
-                    addToStatus($"\n Error during SetValue(17): Exception: {ex.Message}");
+                    addToStatus($"Error during SetValue(17): Exception: {ex.Message}");
                 }
 
                 try {
@@ -114,20 +114,20 @@ namespace UnityPassportDemo {
             finally {
                 isProcessing = false;
             }
-            addToStatus("\nDone");
+            addToStatus("Done");
             mainnetButton.interactable = true;
             testnetButton.interactable = true;
         }
 
 
         public void Update() {
-            if (isProcessing) {
-                DateTime now = DateTime.Now;
-                if ((now - timeOfLastDot).TotalMilliseconds > TIME_PER_DOT) {
-                    timeOfLastDot = now;
-                    status = status + ".";
-                }
-            }
+            // if (isProcessing) {
+            //     DateTime now = DateTime.Now;
+            //     if ((now - timeOfLastDot).TotalMilliseconds > TIME_PER_DOT) {
+            //         timeOfLastDot = now;
+            //         status = status + ".";
+            //     }
+            // }
             outputText.text = status;
         }
 
