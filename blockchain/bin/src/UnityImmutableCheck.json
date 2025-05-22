@@ -1,0 +1,294 @@
+{
+    "contractName": "UnityImmutableCheck",
+    "abi": [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ValueSet",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "setValue",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "value",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"ValueSet\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"setValue\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"value\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/peterrobinson/dev/examples/unity-passport-demo/blockchain/src/UnityImmutableCheck.sol\":\"UnityImmutableCheck\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"/Users/peterrobinson/dev/examples/unity-passport-demo/blockchain/src/UnityImmutableCheck.sol\":{\"keccak256\":\"0xd192dcec1a09c6ab44850fbb5d2e00e929714557c25de2f974a9586f837c8d46\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3a999e5d147911f8088d7049a5ff494b91f32a9d3930d3cae17f26bc9ff7f9d4\",\"dweb:/ipfs/QmQJJhVRXWVjTpSF2YPtjyBnTmpX5stwPmuqHpDuyvUCyS\"]}},\"version\":1}",
+    "bytecode": "608080604052346013576096908160188239f35b5f80fdfe60808060405260043610156011575f80fd5b5f3560e01c9081633fa4f2451460495750635524107714602f575f80fd5b3460455760203660031901126045576004355f55005b5f80fd5b346045575f3660031901126045576020905f548152f3fea2646970667358221220c4e11ee18656a2e6151931324605f842b1726201c7f2ad14a6b2b0ba7ec3d45764736f6c634300081e0033",
+    "deployedBytecode": "60808060405260043610156011575f80fd5b5f3560e01c9081633fa4f2451460495750635524107714602f575f80fd5b3460455760203660031901126045576004355f55005b5f80fd5b346045575f3660031901126045576020905f548152f3fea2646970667358221220c4e11ee18656a2e6151931324605f842b1726201c7f2ad14a6b2b0ba7ec3d45764736f6c634300081e0033",
+    "sourceMap": "98:175:0:-:0;;;;;;;;;;;;;;;;;",
+    "deployedSourceMap": "98:175:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;98:175:0;;;;;;;;;;;;;;;;;;;-1:-1:-1;;98:175:0;;;;;;;;;;",
+    "sourcePath": "/Users/peterrobinson/dev/examples/unity-passport-demo/blockchain/src/UnityImmutableCheck.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.30+commit.73712a01"
+    },
+    "ast": {
+        "absolutePath": "/Users/peterrobinson/dev/examples/unity-passport-demo/blockchain/src/UnityImmutableCheck.sol",
+        "exportedSymbols": {
+            "UnityImmutableCheck": [
+                18
+            ]
+        },
+        "id": 19,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".28"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "72:24:0"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "UnityImmutableCheck",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 18,
+                "linearizedBaseContracts": [
+                    18
+                ],
+                "name": "UnityImmutableCheck",
+                "nameLocation": "107:19:0",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "anonymous": false,
+                        "eventSelector": "012c78e2b84325878b1bd9d250d772cfe5bda7722d795f45036fa5e1e6e303fc",
+                        "id": 5,
+                        "name": "ValueSet",
+                        "nameLocation": "139:8:0",
+                        "nodeType": "EventDefinition",
+                        "parameters": {
+                            "id": 4,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 3,
+                                    "indexed": false,
+                                    "mutability": "mutable",
+                                    "name": "_value",
+                                    "nameLocation": "156:6:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 5,
+                                    "src": "148:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 2,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "148:7:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "147:16:0"
+                        },
+                        "src": "133:31:0"
+                    },
+                    {
+                        "constant": false,
+                        "functionSelector": "3fa4f245",
+                        "id": 7,
+                        "mutability": "mutable",
+                        "name": "value",
+                        "nameLocation": "185:5:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 18,
+                        "src": "170:20:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                        },
+                        "typeName": {
+                            "id": 6,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "170:7:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                            }
+                        },
+                        "visibility": "public"
+                    },
+                    {
+                        "body": {
+                            "id": 16,
+                            "nodeType": "Block",
+                            "src": "240:31:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "id": 14,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "id": 12,
+                                            "name": "value",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 7,
+                                            "src": "250:5:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "id": 13,
+                                            "name": "_value",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 9,
+                                            "src": "258:6:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "src": "250:14:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "id": 15,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "250:14:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "55241077",
+                        "id": 17,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "setValue",
+                        "nameLocation": "206:8:0",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 10,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 9,
+                                    "mutability": "mutable",
+                                    "name": "_value",
+                                    "nameLocation": "223:6:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 17,
+                                    "src": "215:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 8,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "215:7:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "214:16:0"
+                        },
+                        "returnParameters": {
+                            "id": 11,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "240:0:0"
+                        },
+                        "scope": 18,
+                        "src": "197:74:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "scope": 19,
+                "src": "98:175:0",
+                "usedErrors": [],
+                "usedEvents": [
+                    5
+                ]
+            }
+        ],
+        "src": "72:202:0"
+    },
+    "functionHashes": {
+        "setValue(uint256)": "55241077",
+        "value()": "3fa4f245"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "30000",
+            "executionCost": "87",
+            "totalCost": "30087"
+        },
+        "external": {
+            "setValue(uint256)": "22257",
+            "value()": "2247"
+        }
+    }
+}

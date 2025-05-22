@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-namespace FourteenNumbers {
+namespace UnityPassportDemo {
     // Audit log to store an audit of activity in the game.
     public class AuditLog {
         public const string AUDIT_NEXT = "AUDIT_NEXT";
