@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.immutable.passport": "https://github.com/immutable/unity-immutable-sdk.git?path=/src/Packages/Passport",
+    "com.nethereum.unity": "4.29.0",
     "com.unity.2d.animation": "10.2.0",
     "com.unity.2d.aseprite": "1.2.4",
     "com.unity.2d.psdimporter": "10.1.0",
@@ -49,5 +52,15 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.nethereum.unity"
+      ],
+      "overrideBuiltIns": true
+    }
+  ]
 }
