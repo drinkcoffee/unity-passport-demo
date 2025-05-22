@@ -11,7 +11,7 @@ namespace UnityPassportDemo {
         public const uint LOG_SIZE = 300;
 
         public static void Log(string entry) {
-            string timestamp = DateTime.Now.ToString("yyyyMMdd: HHmmss");
+            string timestamp = DateTime.Now.ToString("yyyyMMdd: HHmmss.fff");
             string logEntry = $"{timestamp}: {entry}";
             Debug.Log(entry);
             

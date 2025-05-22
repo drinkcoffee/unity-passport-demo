@@ -18,17 +18,13 @@ namespace UnityPassportDemo {
         public Button testnetButton;
         public TextMeshProUGUI outputText;
         public TextMeshProUGUI passportText;
-                    
-        // private const int TIME_PER_DOT = 1000;
-        // DateTime timeOfLastDot;
 
-        private CheckContract contract;
+        private const int TIME_PER_DOT = 1000;
+        DateTime timeOfLastDot;
 
-        // string status;
-        // private bool isProcessing = false;
-        // private bool hasError = false;
-        // private string errorMessage = "";
-        // private BigInteger tokenId = BigInteger.Zero;
+        string status;
+        private bool isProcessing = false;
+
 
         public async void Start() {
             AuditLog.Log("Check screen");
@@ -55,11 +51,6 @@ namespace UnityPassportDemo {
             else {
                 passportText.text = "Not Logged In";
             }
-
-//            status = "Claiming ";
-            contract = new CheckContract();
-            // timeOfLastDot = DateTime.Now;
-            // StartClaimProcess();
         }
 
 
@@ -70,13 +61,15 @@ namespace UnityPassportDemo {
             if (buttonText == "Mainnet") {
                 mainnetButton.interactable = false;
                 testnetButton.interactable = false;
-                outputText.text = "Checking MainNet";
+                setStatus("Checking MainNet");
+                testProcess(true);
 
             }
             else if (buttonText == "Testnet") {
                 mainnetButton.interactable = false;
                 testnetButton.interactable = false;
-                outputText.text = "Checking TestNet";
+                status = "Checking TestNet\n";
+                testProcess(false);
             }
             else {
                 AuditLog.Log($"CheckScreen: Unknown button: {buttonText}");
@@ -84,55 +77,72 @@ namespace UnityPassportDemo {
         }
 
 
-        // private async void StartClaimProcess() {
-        //     if (isProcessing) {
-        //         return;
-        //     }
-        //     isProcessing = true;
-        //     hasError = false;
-        //     errorMessage = "";
-        //     tokenId = BigInteger.Zero;
+        private async void testProcess(bool useMainnet) {
+            if (isProcessing) {
+                return;
+            }
+            isProcessing = true;
 
-        //     try {
-        //         AuditLog.Log("Claim transaction");
-        //         var (claimSuccess, claimedTokenId) = await claimContract.Claim();
-        //         if (!claimSuccess) {
-        //             hasError = true;
-        //             errorMessage = "Error during claim: type 1";
-        //         }
-        //         else {
-        //             tokenId = claimedTokenId;
-        //         }
-        //     }
-        //     catch (Exception ex) {
-        //         hasError = true;
-        //         errorMessage = "Error during claim: type 2";
-        //         AuditLog.Log($"Exception in claim process: {ex.Message}");
-        //     }
-        //     finally {
-        //         isProcessing = false;
-        //     }
-        // }
+            timeOfLastDot = DateTime.Now;
+
+            try {
+                CheckContract contract = new CheckContract(useMainnet);
+
+                try {
+                    addToStatus("Calling SetValue(17)");
+                    var success = await contract.SetValue(17);
+                    if (!success) {
+                        addToStatus("\n Error during SetValue(17): Transaction failed");
+                    }
+                    else {
+                        addToStatus("\n Completed SetValue(17)");
+                    }
+                }
+                catch (Exception ex) {
+                    addToStatus($"\n Error during SetValue(17): Exception: {ex.Message}");
+                }
+
+                try {
+                    addToStatus("Calling GetValue()");
+                    var val = await contract.GetValue();
+                    addToStatus($" GetValue returned: {val}");
+                }
+                catch (Exception ex) {
+                    addToStatus($" Error during GetValue(17): Exception: {ex.Message}");
+                }
+            } 
+            finally {
+                isProcessing = false;
+            }
+            addToStatus("\nDone");
+            mainnetButton.interactable = true;
+            testnetButton.interactable = true;
+        }
 
 
-        // public void Update() {
-        //     if (hasError) {
-        //         info.text = errorMessage;
-        //         return;
-        //     }
+        public void Update() {
+            if (isProcessing) {
+                DateTime now = DateTime.Now;
+                if ((now - timeOfLastDot).TotalMilliseconds > TIME_PER_DOT) {
+                    timeOfLastDot = now;
+                    status = status + ".";
+                }
+            }
+            outputText.text = status;
+        }
 
-        //     if (isProcessing) {
-        //         DateTime now = DateTime.Now;
-        //         if ((now - timeOfLastDot).TotalMilliseconds > TIME_PER_DOT) {
-        //             timeOfLastDot = now;
-        //             status = status + ".";
-        //         }
-        //         info.text = status;
-        //     }
-        //     else {
-        //         status = $"Claim process complete! Token ID: {tokenId}";
-        //         info.text = status;
-        //     }
-        // }
+
+        private void setStatus(string s) {
+            status = "";
+            addToStatus(s);
+        }
+
+        private void addToStatus(string s) {
+            AuditLog.Log(s);
+            string timestamp = DateTime.Now.ToString("yyyyMMdd: HHmmss.fff");
+            string logEntry = $"{timestamp}: {s}";
+            status = status + logEntry + "\n";
+        }
+
     }
 }
