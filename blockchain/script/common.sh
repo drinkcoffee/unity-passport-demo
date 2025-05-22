@@ -44,7 +44,7 @@ if [ -z "${FUNCTION_TO_EXECUTE}" ]; then
     exit 1
 fi
 
-script=script/UnityImmutableCheckScript
+script=script/UnityImmutableCheckScript.s.sol:UnityImmutableCheckScript
 
 echo "Configuration"
 echo " IMMUTABLE_RPC: $IMMUTABLE_RPC"
@@ -82,6 +82,7 @@ else
         --priority-gas-price 10000000000 \
         --with-gas-price     10000000100 \
         -vvv \
+     --resume \
         --broadcast \
         --verify \
         --verifier blockscout \
