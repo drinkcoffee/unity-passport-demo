@@ -1,4 +1,4 @@
-// Copyright (c) Immutable Pty Ltd 2025
+// Copyright Immutable Pty Ltd 2025
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 

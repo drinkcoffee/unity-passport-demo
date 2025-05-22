@@ -1,4 +1,5 @@
-// Copyright (c) Whatgame Studios 2024 - 2025
+// Copyright Immutable Pty Ltd 2025
+// SPDX-License-Identifier: MIT
 using UnityEngine;
 using System;
 
