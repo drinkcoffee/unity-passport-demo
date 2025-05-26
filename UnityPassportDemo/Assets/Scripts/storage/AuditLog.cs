@@ -22,6 +22,15 @@ namespace UnityPassportDemo {
             PlayerPrefs.SetInt(AUDIT_NEXT, (int) index);
         }
 
+        public static void Reset() {
+            for (uint i = 0; i < LOG_SIZE; i++) {
+                string key = AUDIT_ENTRY + i.ToString();
+                PlayerPrefs.SetString(key, "");
+            }
+            PlayerPrefs.SetInt(AUDIT_NEXT, 0);
+        }
+
+
         public static string GetLogs() {
             uint startIndex = getNext();
             System.Text.StringBuilder logs = new System.Text.StringBuilder();

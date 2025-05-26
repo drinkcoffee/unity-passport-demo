@@ -45,14 +45,12 @@ namespace UnityPassportDemo {
         private void onDeepLinkActivated(string url) {
             AuditLog.Log("Deep link activated: " + url);
 
-            if (url == PassportLogin.RedirectUri) {
-                PassportStore.SetLoggedIn(true);
+            if (url == WelcomeScreen.RedirectUri) {
                 AuditLog.Log("Deep link is login");
                 LoginPath = DEEP_LINK;
                 SceneManager.LoadScene("CheckScene", LoadSceneMode.Single);
             }
-            else if (url == PassportLogin.LogoutUri) {
-                PassportStore.SetLoggedIn(false);
+            else if (url == WelcomeScreen.LogoutUri) {
                 AuditLog.Log("Deep link is logout");
                 SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
             }

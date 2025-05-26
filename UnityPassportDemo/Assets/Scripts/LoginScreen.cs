@@ -15,9 +15,8 @@ namespace UnityPassportDemo {
         private Coroutine loginCheckRoutine;
         private bool isRunning = false;
 
-        public async Task Start() {
+        public void Start() {
             AuditLog.Log("Login screen");
-            await PassportLogin.Init();
             startCoroutine();
         }
 
@@ -66,8 +65,6 @@ namespace UnityPassportDemo {
             bool loggedIn = await Passport.Instance.HasCredentialsSaved();
             AuditLog.Log("CheckLogin: Loggedin: " + loggedIn);
             if (loggedIn) {
-                PassportStore.SetLoggedIn(true);
-                PassportStore.SetLoggedInChecked();
                 DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_THREAD;
                 SceneManager.LoadScene("CheckScene", LoadSceneMode.Single);
                 stopCoroutine();

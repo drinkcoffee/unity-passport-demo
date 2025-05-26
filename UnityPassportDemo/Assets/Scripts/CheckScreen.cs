@@ -14,8 +14,7 @@ using Immutable.Passport;
 namespace UnityPassportDemo {
 
     public class CheckImmutable : MonoBehaviour {
-        public Button mainnetButton;
-        public Button testnetButton;
+        public Button checkButton;
         public TextMeshProUGUI outputText;
         public TextMeshProUGUI passportText;
 
@@ -29,47 +28,28 @@ namespace UnityPassportDemo {
         public async void Start() {
             AuditLog.Log("Check screen");
 
-            passportText.text = "Loading";
-            bool isLoggedIn = PassportStore.IsLoggedIn();
-            if (isLoggedIn) {
-                await PassportLogin.Init();
-                await PassportLogin.Login();
-
-                // Set up wallet (includes creating a wallet for new players)
-                List<string> accounts = await Passport.Instance.ZkEvmRequestAccounts();
-                if (accounts.Count ==0) {
-                    passportText.text = "Logged In";
-                }
-                else {
-                    string account = accounts[0];
-                    passportText.text = "Logged In (" + 
-                                    DeepLinkManager.Instance.LoginPath + 
-                                    ") as\n" + 
-                                    account;
-                }
+            // Set up provider
+            await Immutable.Passport.Passport.Instance.ConnectEvm();
+            // Set up wallet (includes creating a wallet for new players)
+            List<string> accounts = await Passport.Instance.ZkEvmRequestAccounts();
+            if (accounts.Count ==0) {
+                passportText.text = "Logged In (" + 
+                                DeepLinkManager.Instance.LoginPath + 
+                                ")"; 
             }
             else {
-                passportText.text = "Not Logged In";
+                string account = accounts[0];
+                passportText.text = "Logged In (" + 
+                                DeepLinkManager.Instance.LoginPath + 
+                                ") as\n" + 
+                                account;
             }
         }
 
-
-
-        
-
         public void OnButtonClick(string buttonText) {
-            if (buttonText == "Mainnet") {
-                mainnetButton.interactable = false;
-                testnetButton.interactable = false;
-                setStatus("Checking MainNet");
-                testProcess(true);
-
-            }
-            else if (buttonText == "Testnet") {
-                mainnetButton.interactable = false;
-                testnetButton.interactable = false;
-                status = "Checking TestNet\n";
-                testProcess(false);
+            if (buttonText == "Check") {
+                checkButton.interactable = false;
+                testProcess();
             }
             else {
                 AuditLog.Log($"CheckScreen: Unknown button: {buttonText}");
@@ -77,16 +57,18 @@ namespace UnityPassportDemo {
         }
 
 
-        private async void testProcess(bool useMainnet) {
+        private async void testProcess() {
             if (isProcessing) {
                 return;
             }
             isProcessing = true;
 
+            status = WelcomeScreen.UsingMainnet ? "Checking Mainnet\n" : "Checking Testnet\n";
+
             timeOfLastDot = DateTime.Now;
 
             try {
-                CheckContract contract = new CheckContract(useMainnet);
+                CheckContract contract = new CheckContract(WelcomeScreen.UsingMainnet);
 
                 try {
                     addToStatus("Calling SetValue(17)");
@@ -115,8 +97,7 @@ namespace UnityPassportDemo {
                 isProcessing = false;
             }
             addToStatus("Done");
-            mainnetButton.interactable = true;
-            testnetButton.interactable = true;
+            checkButton.interactable = true;
         }
 
 
