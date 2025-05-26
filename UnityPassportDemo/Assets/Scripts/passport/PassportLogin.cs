@@ -20,10 +20,11 @@ namespace UnityPassportDemo {
         public static string LogoutUri = "unityimmutablecheck://logout";
 
         // Passport Client ID: This is different for each game. Get this Immutable Hub.
-        public static string ClientId = "l3l9rlc0w1eAPZqyIo2NCSu6Onrufwjw";
+        public static string TestNetClientId = "l3l9rlc0w1eAPZqyIo2NCSu6Onrufwjw";
+        public static string MainNetClientId = "MAgEqiV6HUzsnNwbh2JnZuu1X4lPlZco";
 
 
-        public static async Task Init() {
+        public static async Task Init(bool useMainnet) {
             string redirectUri = null;
             string logoutUri = null;
             #if (UNITY_ANDROID && !UNITY_EDITOR_WIN) || (UNITY_IPHONE && !UNITY_EDITOR_WIN) || UNITY_STANDALONE_OSX
@@ -33,9 +34,15 @@ namespace UnityPassportDemo {
             
             // Set the environment to SANDBOX for testing or PRODUCTION for production
             string environment = Immutable.Passport.Model.Environment.SANDBOX;
+            string clientId = TestNetClientId;
+            if (useMainnet) {
+                environment = Immutable.Passport.Model.Environment.PRODUCTION;
+                clientId = MainNetClientId;
+            }
+            AuditLog.Log($"Env: {environment}, clientId: {clientId}");
 
             if (Immutable.Passport.Passport.Instance == null) {
-                await Immutable.Passport.Passport.Init(ClientId, environment, redirectUri, logoutUri);
+                await Immutable.Passport.Passport.Init(clientId, environment, redirectUri, logoutUri);
             }
         }
 

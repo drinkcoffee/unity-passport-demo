@@ -22,6 +22,7 @@ namespace UnityPassportDemo {
         public const string TESTNET_ADDRESS = "0xe54431e297c3126d619cde60728cfafeac78a07e";
         public const string TESTNET_RPC_URL = "https://rpc.testnet.immutable.com/";
 
+        public const string MAINNET_ADDRESS = "0x60f4ae3cc8cdf0172d1f137de5e9e0d736ae9857";
         public const string MAINNET_RPC_URL = "https://rpc.immutable.com/";
 
         UnityImmutableCheckService service;
@@ -29,9 +30,8 @@ namespace UnityPassportDemo {
         public CheckContract(bool mainnet) : base() {
             string rpc;
             if (mainnet) {
+                contractAddress = MAINNET_ADDRESS;
                 rpc = MAINNET_RPC_URL;
-                AuditLog.Log("Not implemented yet");
-                throw new Exception("Not implemented yet");
             }
             else {
                 contractAddress = TESTNET_ADDRESS;

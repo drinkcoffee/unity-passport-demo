@@ -14,8 +14,7 @@ using Immutable.Passport;
 namespace UnityPassportDemo {
 
     public class CheckImmutable : MonoBehaviour {
-        public Button mainnetButton;
-        public Button testnetButton;
+        public Button checkButton;
         public TextMeshProUGUI outputText;
         public TextMeshProUGUI passportText;
 
@@ -32,8 +31,8 @@ namespace UnityPassportDemo {
             passportText.text = "Loading";
             bool isLoggedIn = PassportStore.IsLoggedIn();
             if (isLoggedIn) {
-                await PassportLogin.Init();
-                await PassportLogin.Login();
+                // await PassportLogin.Init();
+                // await PassportLogin.Login();
 
                 // Set up wallet (includes creating a wallet for new players)
                 List<string> accounts = await Passport.Instance.ZkEvmRequestAccounts();
@@ -54,22 +53,12 @@ namespace UnityPassportDemo {
         }
 
 
-
-        
-
         public void OnButtonClick(string buttonText) {
-            if (buttonText == "Mainnet") {
-                mainnetButton.interactable = false;
-                testnetButton.interactable = false;
+            if (buttonText == "Check") {
+                checkButton.interactable = false;
                 setStatus("Checking MainNet");
-                testProcess(true);
+                testProcess();
 
-            }
-            else if (buttonText == "Testnet") {
-                mainnetButton.interactable = false;
-                testnetButton.interactable = false;
-                status = "Checking TestNet\n";
-                testProcess(false);
             }
             else {
                 AuditLog.Log($"CheckScreen: Unknown button: {buttonText}");
@@ -77,11 +66,19 @@ namespace UnityPassportDemo {
         }
 
 
-        private async void testProcess(bool useMainnet) {
+        private async void testProcess() {
+            bool useMainnet = WelcomeScreen.UseMainnet;
             if (isProcessing) {
                 return;
             }
             isProcessing = true;
+
+            if (useMainnet) {
+                setStatus("Checking Mainnet");
+            }
+            else {
+                setStatus("Checking Testnet");
+            }
 
             timeOfLastDot = DateTime.Now;
 
@@ -115,8 +112,7 @@ namespace UnityPassportDemo {
                 isProcessing = false;
             }
             addToStatus("Done");
-            mainnetButton.interactable = true;
-            testnetButton.interactable = true;
+            checkButton.interactable = true;
         }
 
 

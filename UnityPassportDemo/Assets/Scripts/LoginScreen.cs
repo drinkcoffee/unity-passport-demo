@@ -15,9 +15,8 @@ namespace UnityPassportDemo {
         private Coroutine loginCheckRoutine;
         private bool isRunning = false;
 
-        public async Task Start() {
+        public void Start() {
             AuditLog.Log("Login screen");
-            await PassportLogin.Init();
             startCoroutine();
         }
 
@@ -25,16 +24,18 @@ namespace UnityPassportDemo {
             stopCoroutine();
         }
 
-
         public async void OnButtonClick(string buttonText) {
             if (buttonText == "Login") {
-                //Debug.Log("LoginPKCE start");
+                try {
 #if (UNITY_ANDROID && !UNITY_EDITOR_WIN) || (UNITY_IPHONE && !UNITY_EDITOR_WIN) || UNITY_STANDALONE_OSX
-                await Passport.Instance.LoginPKCE();
+                    await Passport.Instance.LoginPKCE();
 #else
-                await Passport.Instance.Login();
+                    await Passport.Instance.Login();
 #endif
-                //Debug.Log("LoginPKCE done");
+                }
+                catch (System.Exception e) {
+                    AuditLog.Log($"Login failed: {e.Message}");
+                }
             }
             else {
                 AuditLog.Log("Login Screen: Unknown button");
@@ -57,20 +58,25 @@ namespace UnityPassportDemo {
 
         IEnumerator LoginCheckRoutine() {
             while (true) {
-                CheckLogin();
+                _ = CheckLoginAsync();
                 yield return new WaitForSeconds(1f);
             }
         }
 
-        private async void CheckLogin() {
-            bool loggedIn = await Passport.Instance.HasCredentialsSaved();
-            AuditLog.Log("CheckLogin: Loggedin: " + loggedIn);
-            if (loggedIn) {
-                PassportStore.SetLoggedIn(true);
-                PassportStore.SetLoggedInChecked();
-                DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_THREAD;
-                SceneManager.LoadScene("CheckScene", LoadSceneMode.Single);
-                stopCoroutine();
+        private async Task CheckLoginAsync() {
+            try {
+                bool loggedIn = await Passport.Instance.HasCredentialsSaved();
+                AuditLog.Log("CheckLogin: Loggedin: " + loggedIn);
+                if (loggedIn) {
+                    PassportStore.SetLoggedIn(true);
+                    PassportStore.SetLoggedInChecked();
+                    DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_THREAD;
+                    SceneManager.LoadScene("CheckScene", LoadSceneMode.Single);
+                    stopCoroutine();
+                }
+            }
+            catch (System.Exception e) {
+                AuditLog.Log($"CheckLogin failed: {e.Message}");
             }
         }
     }

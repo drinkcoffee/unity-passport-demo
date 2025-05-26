@@ -10,7 +10,7 @@ if [ -z "${IMMUTABLE_NETWORK}" ]; then
     echo "Error: IMMUTABLE_NETWORK variable is not set"
     exit 1
 fi
-if [[ $IMMUTABLE_NETWORK -eq 1 ]]
+if [ "$IMMUTABLE_NETWORK" = "MAINNET" ]
 then
     echo Immutable zkEVM Mainnet Configuration
     IMMUTABLE_RPC=https://rpc.immutable.com
@@ -82,7 +82,6 @@ else
         --priority-gas-price 10000000000 \
         --with-gas-price     10000000100 \
         -vvv \
-     --resume \
         --broadcast \
         --verify \
         --verifier blockscout \

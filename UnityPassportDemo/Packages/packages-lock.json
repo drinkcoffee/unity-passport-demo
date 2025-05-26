@@ -15,7 +15,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.0",
         "com.cysharp.unitask": "2.3.3"
       },
-      "hash": "7af6f2d6eedd3d40b99a74a8c5ea15b5aeba57b2"
+      "hash": "ea39962027be5f933e2d97e767ce2a041525aa19"
     },
     "com.nethereum.unity": {
       "version": "4.29.0",
