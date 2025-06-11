@@ -51,6 +51,9 @@ namespace UnityPassportDemo {
                 checkButton.interactable = false;
                 testProcess();
             }
+            else if (buttonText == "Info") {
+                show();
+            }
             else {
                 AuditLog.Log($"CheckScreen: Unknown button: {buttonText}");
             }
@@ -100,15 +103,31 @@ namespace UnityPassportDemo {
             checkButton.interactable = true;
         }
 
+        private async void show() {
+            setStatus("All Passport Info");
+
+            List<string> accounts = await Passport.Instance.ZkEvmRequestAccounts();
+            addToStatus($"Accounts returned: {accounts.Count}");
+            for (int i = 0; i < accounts.Count; i++) {
+                addToStatus($"Account[{i}]: {accounts[i]}");
+            }
+
+            addToStatus($"HasCredentialsSaved: {await Passport.Instance.HasCredentialsSaved()}");
+            // Possible to get access token: very large.
+            //addToStatus($"GetAccessToken: {await Passport.Instance.GetAccessToken()}");
+            accounts = await Passport.Instance.GetLinkedAddresses();
+            addToStatus($"GetLinkedAddresses length: {accounts.Count}");
+            for (int i = 0; i < accounts.Count; i++) {
+                addToStatus($"Linked Account[{i}]: {accounts[i]}");
+            }
+            addToStatus($"GetEmail: {await Passport.Instance.GetEmail()}");
+            addToStatus($"GetPassportId: {await Passport.Instance.GetPassportId()}");
+        }
+
+
+
 
         public void Update() {
-            // if (isProcessing) {
-            //     DateTime now = DateTime.Now;
-            //     if ((now - timeOfLastDot).TotalMilliseconds > TIME_PER_DOT) {
-            //         timeOfLastDot = now;
-            //         status = status + ".";
-            //     }
-            // }
             outputText.text = status;
         }
 
